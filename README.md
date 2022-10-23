@@ -6,5 +6,5 @@ xbazel is inspired by xmake & bazel, the target is to mantain an large number of
 3. A simple cpp server demo that uses this libraries.
 
 
-### Every problems is welcome, including new library advice
+### Issues is welcome, including new library advice
 ### Enjoy it!
