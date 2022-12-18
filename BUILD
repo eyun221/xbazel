@@ -32,6 +32,8 @@ cc_binary(
         # gperftools conflicts with jemalloc
         # "@gperftools",
 
+        "@zookeeper//:zookeeper",
+
         "@double-conversion",
         "@smhasher",
         "@xsimd",
