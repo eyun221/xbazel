@@ -7,4 +7,8 @@ xbazel is inspired by xmake & bazel, the target is to mantain an large number of
 
 
 ### Issues is welcome, including new library proposals
-### Enjoy it!
+
+### Library List
+- boost
+- gflags
+- glog
