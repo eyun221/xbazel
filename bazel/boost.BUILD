@@ -1,0 +1,65 @@
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "boost",
+    srcs = ["libs/atomic/src/lockpool.cpp"],
+    hdrs = ["boost/memory_order.hpp"],
+    defines = [
+        "BOOST_ATOMIC_SOURCE",
+        "BOOST_ATOMIC_STATIC_LINK",
+        "BOOST_CHRONO_STATIC_LINK",
+        "BOOST_CHRONO_STATIC_LINK",
+        "BOOST_CONTAINER_STATIC_LINK",
+        "BOOST_CONTEXT_SOURCE",
+        "BOOST_DISABLE_ASSERTS",
+        "BOOST_CONTRACT_STATIC_LINK",
+        "BOOST_THREAD_PLATFORM_PTHREAD",
+        "BOOST_THREAD_BUILD_LIB=1",
+        "BOOST_THREAD_POSIX",
+        "BOOST_THREAD_USES_CHRONO",
+        "BOOST_TIMER_STATIC_LINK",
+        "BOOST_FILESYSTEM_STATIC_LINK",
+        "BOOST_IOSTREAMS_USE_DEPRECATED",
+        "BOOST_COROUTINES_SOURCE",
+        "BOOST_COROUTINES_NO_DEPRECATION_WARNING",
+        "BOOST_FIBERS_SOURCE",
+        "BOOST_DISABLE_ASSERTS",
+        "BOOST_THREAD_NO_LIB=1",
+        "BOOST_LOCALE_WITH_ICONV=1",
+        "BOOST_LOCALE_NO_STD_BACKEND=1",
+        "BOOST_LOCALE_NO_WINAPI_BACKEND=1",
+        "BOOST_LOG_USE_AVX2",
+        "BOOST_LOG_USE_SSSE3",
+        "BOOST_LOG_BUILDING_THE_LIB=1",
+        "BOOST_LOG_WITHOUT_EVENT_LOG",
+        "BOOST_LOG_WITHOUT_DEBUG_OUTPUT",
+        "BOOST_LOG_SETUP_BUILDING_THE_LIB=1",
+        "BOOST_THREAD_USE_LIB=1",
+    ],
+    linkstatic = 1,
+    linkopts = [
+        "-lrt",
+        "-lpthread",
+    ],
+    copts = [
+        "-ftemplate-depth-255",
+        "-fvisibility=hidden",
+        "-fvisibility-inlines-hidden",
+        "-Wno-deprecated-declarations",
+        "-msse4.2",
+        "-mavx2",
+        "-Wall",
+        "-Wextra",
+        "-pedantic",
+        "-Wno-long-long",
+        "-Wno-variadic-macros",
+        "-Wunused-function",
+        "-Wno-unused-parameter",
+    ],
+    deps = [
+    ],
+)
+
+
+
+
