@@ -47,20 +47,12 @@ git_repository(
 )
 
 
-new_git_repository(
-    name = "gmock",
-    remote = "https://github.com/google/googlemock.git",
-    tag = "release-1.7.0",
-    build_file = "@brpc//:gmock.BUILD",
-)
 
-
-
-skylib_version = "0.8.0"
+skylib_version = "1.1.1"
 git_repository(
     name = "bazel_skylib",
     remote = "https://github.com/bazelbuild/bazel-skylib.git",
-    tag = "0.8.0",
+    tag = "1.1.1",
 )
 
 git_repository(
@@ -69,15 +61,25 @@ git_repository(
     commit = "608c7b6",
 )
 
-
 git_repository(
     name = "rules_foreign_cc",
     remote = "https://github.com/bazelbuild/rules_foreign_cc.git",
-    #tag = "0.5.1",
     tag = "0.9.0",
 )
 load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
 rules_foreign_cc_dependencies()
+
+
+###################  protobuf  ############
+
+new_git_repository(
+    name = "com_github_madler_zlib",
+    remote = "https://github.com/madler/zlib.git",
+    tag = "v1.2.11",
+    build_file = "@brpc//bazel/third_party/zlib:zlib.BUILD",
+)
+bind(name = "zlib", actual = "@com_github_madler_zlib//:zlib")
+
 
 git_repository(
     name = "rules_protobuf",
@@ -86,21 +88,17 @@ git_repository(
 )
 
 
-
-# remove -DHAVE_ZLIB
 git_repository(
     name = "com_google_protobuf",
     remote = "https://github.com/protocolbuffers/protobuf.git",
-    #build_file = "//bazel:protobuf.BUILD",
-    tag = "v3.7.0",
+    tag = "v3.19.1",
+    repo_mapping = {"@zlib": "@com_github_madler_zlib"},
 )
 
-new_git_repository(
-    name = "com_github_google_leveldb",
-    remote = "https://github.com/google/leveldb.git",
-    build_file = "@brpc//:leveldb.BUILD",
-    tag = "v1.20",
-)
+
+#####################  protobuf  #################
+
+
 
 
 new_git_repository(
@@ -110,57 +108,79 @@ new_git_repository(
     tag = "v7.8.3",
 )
 
-#yum install openssl-devel
-new_local_repository(
-    name = "openssl",
-    path = "/usr",
-    build_file = "@brpc//:openssl.BUILD",
+
+load("//bazel:grpc.bzl", "grpc_deps")
+grpc_deps()
+
+
+
+
+#############   brpc #############
+git_repository(
+    name = "brpc",
+    remote = "https://github.com/apache/incubator-brpc.git",
+    tag = "1.3.0",
+    repo_mapping = {"@zlib": "@com_github_madler_zlib"},
 )
 
+new_git_repository(
+    name = "com_github_google_snappy",
+    remote = "https://github.com/google/snappy.git",
+    tag = "1.1.7",
+    build_file = "@brpc//bazel/third_party/snappy:snappy.BUILD",
+)
+
+git_repository(
+    name = "platforms",
+    remote = "https://github.com/bazelbuild/platforms.git",
+    tag = "0.0.6",
+)
+
+new_git_repository(
+    name = "com_github_google_leveldb",
+    remote = "https://github.com/google/leveldb.git",
+    build_file = "//bazel:leveldb.BUILD",
+    tag = "1.23",
+)
+
+git_repository(
+    name = "rules_perl",
+    remote = "https://github.com/bazelbuild/rules_perl.git",
+    commit = "022b8daf2bb4836ac7a50e4a1d8ea056a3e1e403",
+)
+load("@rules_perl//perl:deps.bzl", "perl_register_toolchains")
+perl_register_toolchains()
+
+new_git_repository(
+    name = "com_github_google_crc32c",
+    remote = "https://github.com/google/crc32c.git",
+    #build_file = "@brpc//bazel/third_party/crc32c:crc32c.BUILD",
+    build_file = "//bazel:c2c.BUILD",
+    tag = "1.1.2",
+)
+git_repository(
+    name = "com_grail_bazel_compdb",
+    remote = "https://github.com/grailbio/bazel-compilation-database.git",
+    tag = "0.5.2",
+)
+load("@com_grail_bazel_compdb//:deps.bzl", "bazel_compdb_deps")
+bazel_compdb_deps()
+
+# brpc can not use boringssl
+new_git_repository(
+    name = "openssl",
+    remote = "https://github.com/openssl/openssl.git",
+    build_file = "@brpc//bazel/third_party/openssl:openssl.BUILD",
+    tag = "OpenSSL_1_1_1m",
+)
 bind(
     name = "ssl",
     actual = "@openssl//:ssl"
 )
 
+#######################   brpc #############
 
 
-
-#git_repository(
-#    name = "boringssl",
-#    remote = "https://github.com/google/boringssl.git",
-#    #tag = "v1.0.0-bazel",
-#   commit = "afc30d43eef92979b05776ec0963c9cede5fb80f"
-#)
-#bind(name = "ssl", actual = "@boringssl//:ssl")
-#bind(name = "crypto", actual = "@boringssl//:crypto")
-
-
-# yum install  zlib-devel
-new_local_repository(
-    name = "zlib_archive",
-    build_file = "@brpc//:zlib.BUILD",
-    path = "/usr",
-)
-
-
-#new_git_repository(
-#    name = "zlib_archive",
-#    remote = "https://github.com/madler/zlib.git",
-#    tag = "v1.2.11",
-#    build_file = "@brpc//:zlib.BUILD",
-#)
-bind(name = "zlib", actual = "@zlib_archive//:zlib")
-
-
-load("//bazel:grpc.bzl", "grpc_deps")
-grpc_deps()
-
-git_repository(
-    name = "brpc",
-    remote = "https://github.com/apache/incubator-brpc.git",
-    tag = "1.2.0",
-    repo_mapping = {"@zlib": "@zlib_archive"},
-)
 
 
 new_git_repository(
@@ -206,12 +226,6 @@ new_git_repository(
     build_file = "//bazel:hiredis.BUILD",
 )
 
-new_git_repository(
-    name = "snappy",
-    remote = "https://github.com/google/snappy.git",
-    tag = "1.1.9",
-    build_file = "//bazel:snappy.BUILD",
-)
 
 new_git_repository(
     name = "gperftools",
@@ -291,7 +305,7 @@ new_git_repository(
     remote = "https://github.com/confluentinc/librdkafka.git",
     tag = "v1.0.0",
     build_file = "//bazel:librdkafka.BUILD",
-    repo_mapping = {"@zlib": "@zlib_archive"},
+    repo_mapping = {"@zlib": "@com_github_madler_zlib"},
 )
 
 new_git_repository(

@@ -26,7 +26,7 @@ cc_binary(
         "@rapidjson",
         "@libcuckoo",
         "@hiredis",
-        "@snappy",
+        "@com_github_google_snappy//:snappy",
         "@concurrentqueue",
 
         # gperftools conflicts with jemalloc
