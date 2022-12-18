@@ -32,6 +32,7 @@ xbazel is inspired by xmake & bazel, the target is to mantain an large number of
 - bazel-skylib
 - rules_cc
 - rules_protobuf
+- rules_foreign_cc
 - openssl
 - boringssl
 - zlib
