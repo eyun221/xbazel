@@ -12,6 +12,9 @@ xbazel is inspired by xmake & bazel, the target is to mantain an large number of
 
 ### Thease libraries are all open source libraries from github, let's thanks for their great job!
 
+
+## If you love this project, please star it, thanks!
+
 ### Library List
 - boost
 - gflags

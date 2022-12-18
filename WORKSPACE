@@ -40,7 +40,7 @@ git_repository(
 )
 
 
-new_git_repository(
+git_repository(
     name = "com_google_googletest",
     remote = "https://github.com/google/googletest.git",
     tag = "release-1.11.0",
@@ -102,7 +102,12 @@ new_git_repository(
 )
 
 
-
+new_git_repository(
+    name = "rocksdb",
+    remote = "https://github.com/facebook/rocksdb.git",
+    build_file = "//bazel:rocksdb.BUILD",
+    tag = "v7.8.3",
+)
 
 #yum install openssl-devel
 new_local_repository(

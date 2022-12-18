@@ -1,6 +1,11 @@
 package(default_visibility = ["//visibility:public"])
 licenses(["notice"])
 
+# for cpu has sse, you should uncomment the following config
+#"-DHAVE_SSE42",
+#"-msse4.2",
+
+
 genrule(
     name = "build_version",
     srcs = [
@@ -367,11 +372,12 @@ cc_library(
         "-DJEMALLOC_NO_DEMANGLE",
         "-DOS_LINUX",
         "-DSNAPPY",
-        "-DHAVE_SSE42",
+        # for cpu has sse, you should uncomment the following config
+        #"-DHAVE_SSE42",
+        #"-msse4.2",
         "-DZLIB",
         "-fno-omit-frame-pointer",
         "-momit-leaf-frame-pointer",
-        "-msse4.2",
         "-pthread",
         "-Werror",
         "-Wsign-compare",
@@ -387,14 +393,15 @@ cc_library(
     linkopts = [
         "-lm",
         "-lpthread",
+        "-ldl"
     ],
     deps = [
+        "@com_github_google_glog//:glog",
         "@com_github_gflags_gflags//:gflags",
-        "@glog",
         "@com_google_googletest//:gtest",
         "@jemalloc",
         "@snappy",
-        "@zlib",
+        "//external:zlib",
     ],
     visibility = ["//visibility:public"],
 )

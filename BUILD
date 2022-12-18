@@ -15,6 +15,9 @@ cc_binary(
         "@boost//:thread",
         "@com_github_google_glog//:glog",
         "@com_github_gflags_gflags//:gflags",
+        "@com_google_googletest//:gtest",
+        # rocksdb conflicts with leveldb
+        #"@rocksdb",
         "@brpc",
         "@jemalloc",
         "@robin-map",
