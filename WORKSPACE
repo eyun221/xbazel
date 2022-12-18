@@ -73,7 +73,8 @@ git_repository(
 git_repository(
     name = "rules_foreign_cc",
     remote = "https://github.com/bazelbuild/rules_foreign_cc.git",
-    tag = "0.5.1",
+    #tag = "0.5.1",
+    tag = "0.9.0",
 )
 load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
 rules_foreign_cc_dependencies()

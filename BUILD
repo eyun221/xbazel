@@ -16,8 +16,10 @@ cc_binary(
         "@com_github_google_glog//:glog",
         "@com_github_gflags_gflags//:gflags",
         "@com_google_googletest//:gtest",
+
         # rocksdb conflicts with leveldb
-        #"@rocksdb",
+        # "@rocksdb",
+
         "@brpc",
         "@jemalloc",
         "@robin-map",
@@ -26,7 +28,10 @@ cc_binary(
         "@hiredis",
         "@snappy",
         "@concurrentqueue",
-        #"@gperftools//:tcmalloc",
+
+        # gperftools conflicts with jemalloc
+        # "@gperftools",
+
         "@double-conversion",
         "@smhasher",
         "@xsimd",
