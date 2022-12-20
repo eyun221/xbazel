@@ -313,8 +313,8 @@ new_git_repository(
     remote = "https://github.com/apache/zookeeper.git",
     tag = "release-3.7.1",
     build_file = "@xbazel//bazel:zookeeper.BUILD",
-    #patches=["@xbazel//bazel:zookeeper.patch"],
-    #patch_args = ["-p1"],
+    patches=["@xbazel//bazel:zookeeper.patch"],
+    patch_args = ["-p1"],
 )
 
 
