@@ -33,9 +33,14 @@ xbazel is inspired by xmake & bazel, the target is to mantain an large number of
 - rules_cc
 - rules_protobuf
 - rules_foreign_cc
+- rules_perl
+- bazel-compilation-database
+- platforms
 - openssl
 - boringssl
 - zlib
+- zstd
+- crc32c
 - brpc
 - jemalloc
 - gperftools(tcmalloc)

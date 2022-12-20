@@ -37,6 +37,7 @@ cc_binary(
         "@double-conversion",
         "@smhasher",
         "@xsimd",
+        "@zstd",
         "@parallel_hashmap",
         "@flatbuffers",
         "@tinyxml2",

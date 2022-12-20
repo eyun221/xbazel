@@ -336,6 +336,12 @@ new_git_repository(
 )
 
 
+new_git_repository(
+    name = "zstd",
+    remote = "https://github.com/facebook/zstd.git",
+    tag = "v1.5.2",
+    build_file = "//bazel:zstd.BUILD",
+)
 
 new_git_repository(
     name = "lz4",
