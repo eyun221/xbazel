@@ -40,6 +40,9 @@ xbazel is inspired by xmake & bazel, the target is to mantain an large number of
 - boringssl
 - zlib
 - zstd
+- yaml-cpp
+- arrow
+- base64
 - crc32c
 - brpc
 - jemalloc

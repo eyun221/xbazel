@@ -38,6 +38,8 @@ cc_binary(
         "@smhasher",
         "@xsimd",
         "@zstd",
+        "@base64",
+        "@yaml-cpp",
         "@parallel_hashmap",
         "@flatbuffers",
         "@tinyxml2",
