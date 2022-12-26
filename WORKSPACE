@@ -11,14 +11,31 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
 # org_boost_boost
-git_repository(
-    name = "boost",
-    commit = "5d277ca0e165c4de02104bb976233cd6c6b7c75f",
-    remote = "https://github.com/iceboy233/boost.git",
-)
+#git_repository(
+#    name = "boost",
+#    commit = "5d277ca0e165c4de02104bb976233cd6c6b7c75f",
+#    remote = "https://github.com/iceboy233/boost.git",
+#)
+#load("@boost//:boost_deps.bzl", "boost_deps")
+#boost_deps()
 
-load("@boost//:boost_deps.bzl", "boost_deps")
-boost_deps()
+git_repository(
+    name = "com_github_nelhage_rules_boost",
+    remote = "https://github.com/nelhage/rules_boost.git",
+    commit = "f1065639e6f33741abe2a6a78fa79dd1a07bbf5d",
+)
+http_archive(
+    name = "boost",
+    build_file = "@com_github_nelhage_rules_boost//:BUILD.boost",
+    patch_cmds = ["rm -f doc/pdf/BUILD"],
+    patch_cmds_win = ["Remove-Item -Force doc/pdf/BUILD"],
+    sha256 = "205666dea9f6a7cfed87c7a6dfbeb52a2c1b9de55712c9c1a87735d7181452b6",
+    strip_prefix = "boost_1_81_0",
+    urls = [
+        "https://mirror.bazel.build/boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz",
+        "https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz",
+    ],
+)
 
 
 git_repository(
